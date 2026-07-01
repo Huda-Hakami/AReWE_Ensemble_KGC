@@ -11,15 +11,18 @@ The implementation supports training, evaluation, and reproduction of the experi
     * NELL-995
 
 ## Repository Structure
+
+```text
 .
 ├── benchmarks/                 # Benchmark datasets
 ├── checkpoints/                # Saved model checkpoints
-├── PreTrained_KGEs/            # Pretrained embeddings for individual KGE-based model
-├── AReW_Ens_FineTuned/         # Finetuned AReWE ensemble embeddings
+├── PreTrained_KGEs/            # Pretrained embeddings for individual KGE models
+├── AReWE_Ens_FineTuned/        # Finetuned AReWE ensemble embeddings
 ├── openke/                     # Modified OpenKE implementation
 ├── train_AReWE_Ensemble.py     # Training and evaluation script
-├── Train_KGE_Models/           # codes to train individual KGE models
+├── Train_KGE_Models/           # Code to train individual KGE models
 └── README.md
+```
 
 
 
