@@ -31,6 +31,7 @@ Each dataset should contain the corresponding training, validation, and testing 
 
 Training
 Configure the desired dataset and training hyperparameters in train_AReWE_Ensemble.py.
+Download Pretrained KGE models for benchmark KGs in PreTrained_KGEs folder before train AReWE. 
 Run training using:
 python3 train_AReWE_Ensemble.py
 The trained model checkpoint will be saved in:
