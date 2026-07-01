@@ -30,7 +30,7 @@ The implementation supports training, evaluation, and reproduction of the experi
 Each dataset should contain the corresponding training, validation, and testing files required by OpenKE.
 
 Training
-Configure the desired dataset and training hyperparameters in train.py.
+Configure the desired dataset and training hyperparameters in train_AReWE_Ensemble.py.
 Run training using:
 python3 train_AReWE_Ensemble.py
 The trained model checkpoint will be saved in:
