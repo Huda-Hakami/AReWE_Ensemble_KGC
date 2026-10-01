@@ -3,8 +3,7 @@
 This repository contains the reference implementation of AReWE (Adaptive Relation-specific Ensemble), a relation-aware ensemble framework for Knowledge Graph Completion (KGC). AReWE jointly fine-tunes multiple Knowledge Graph Embedding (KGE) models and adaptively estimates relation-specific weights during training to improve link prediction performance.
 The implementation supports training, evaluation, and reproduction of the experiments reported in the accompanying paper.
 
-<img width="2000" height="2000" alt="AReWE_Figure_white" src="https://github.com/user-attachments/assets/6a0e2c4e-ae7b-475f-8395-44afdd86b5d3" />
-
+<img width="5422" height="2539" alt="AReWE_Figure_white" src="https://github.com/user-attachments/assets/e6edcd83-6a2b-43cd-992d-a42c8ceeadec" />
 
 
 ## Features
