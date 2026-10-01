@@ -62,9 +62,6 @@ tester1.run_relation_prediction(type_constrain = False)
 acc,thre=tester1.run_triple_classification()
 print (acc,thre)
 sys.stdout.flush()
-del test_dataloader_all
-del tester1
 
-
-# embeddings = distmult.get_parameters("numpy")
-# np.save("embeddings/distmult_embeddings_negent%d_negrel%d_%s.npy"%(negEnt,negRel,data_folder),embeddings)
+embeddings = distmult.get_parameters("numpy")
+np.save("embeddings/distmult_embeddings_negent%d_negrel%d_%s.npy"%(negEnt,negRel,data_folder),embeddings)
