@@ -9,7 +9,6 @@ from .CurriculumTrainer import CurriculumTrainer
 
 __all__ = [
 	'Trainer',
-	'Trainer_old',
 	'Tester',
 	'CurriculumTrainer'
 ]
