@@ -56,7 +56,7 @@ Reported metrics include:
 ### Training
 To fine-tune AReWE, use: 
 ```bash
-python3 train_AReWE_Ensemble.py --do_train True --dataset FB15K237 --batch_size 64 --epochs 100 --alpha 0.001
+python3 train_AReWE_Ensemble.py --do_train True --data_folder FB15K237 --batch_size 64 --epochs 100 --lr 0.001
 ```
 
 ### Testing
