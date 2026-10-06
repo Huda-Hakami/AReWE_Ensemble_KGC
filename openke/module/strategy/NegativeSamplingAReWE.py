@@ -10,7 +10,7 @@ import torch.nn.functional as F
 class NegativeSamplingAReWE(Strategy):
 
 	def __init__(self, model = None, loss = None, weighting_strategy=None, regul_rate1 = 0.0, regul_rate2 = 0.0, l3_regul_rate = 0.0):
-		super(NegativeSampling, self).__init__()
+		super(NegativeSamplingAReWE, self).__init__()
 		self.model = model
 		self.loss = loss
 		self.weighting_strategy = weighting_strategy
