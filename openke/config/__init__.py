@@ -3,9 +3,11 @@ from __future__ import division
 from __future__ import print_function
 
 from .Trainer import Trainer
+from .TrainerAReWE import TrainerAReWE
 from .Tester import Tester
 
 __all__ = [
 	'Trainer',
+	'TrainerAReWE',
 	'Tester',
 ]
