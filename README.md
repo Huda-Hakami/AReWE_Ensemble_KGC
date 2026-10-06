@@ -52,6 +52,13 @@ Reported metrics include:
 * Hits@3
 * Hits@10
 
+## Run the Code
+### Training
+To fine-tune AReWE, use: 
+
+### Testing
+To evaluate a fine-tuned AReWE model without further training:
+python3 train_AReWE_Ensemble.py --do_train False --data_folder FB15K237
 
 ## Acknowledgements
 This repository builds upon the OpenKE-PyTorch framework for Knowledge Graph Embedding (KGE) models.
