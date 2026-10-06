@@ -2,7 +2,7 @@
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import torch
-print('at Trainer')
+print('at TrainerAReWE')
 print('gpu:', torch.cuda.get_device_name(torch.cuda.current_device()))
 import torch.nn as nn
 from torch.autograd import Variable
@@ -19,7 +19,7 @@ from tqdm import tqdm
 from openke.data import TestDataLoader
 from openke.config.Tester import Tester
 import numpy as np
-class Trainer(object):
+class TrainerAReWE(object):
 
     def __init__(self, model=None, data_loader=None, train_times=1000, alpha=0.5, use_gpu=True, opt_method='sgd', data_folder=None, negEnt=None, rel_batch = False, save_steps=None, early_stop=None, checkpoint_dir=None):
         self.work_threads = 8
@@ -51,19 +51,6 @@ class Trainer(object):
         # torch.nn.utils.clip_grad_norm_(self.model.parameters(), 0.5) #added for convkb
 
         self.optimizer.step()
-
-        # with torch.no_grad():
-        #     w = self.model.model.weights
-        #     sum_=torch.sum(w,dim=1).view(-1,1)
-        #     w=w/sum_
-        #     self.model.model.weights.data = w
-       
-
-        # w = self.model.model.weights.weight.data
-        # w = w.clamp(0,1)
-        # sum_=torch.sum(w,dim=1).view(-1,1)
-        # w=w/sum_
-        # self.model.model.weights.weight.data = w
 
         return loss.item()
 
@@ -109,37 +96,6 @@ class Trainer(object):
         best_performance=1e-7
         relations = self.data_loader.get_rel_tot()
         for epoch in training_range:
-
-            # if epoch%2==0:
-            #     self.model.model.transe_ent_embed.weight.requires_grad=True
-            #     self.model.model.transe_rel_embed.weight.requires_grad=True
-            #     self.model.model.distmult_ent_embed.weight.requires_grad=True
-            #     self.model.model.distmult_rel_embed.weight.requires_grad=True
-            #     self.model.model.rotate_ent_embed.weight.requires_grad=True
-            #     self.model.model.rotate_rel_embed.weight.requires_grad=True
-            #     self.model.model.complex_ent_re_embed.weight.requires_grad=True
-            #     self.model.model.complex_rel_re_embed.weight.requires_grad=True
-            #     self.model.model.complex_ent_im_embed.weight.requires_grad=True
-            #     self.model.model.complex_rel_im_embed.weight.requires_grad=True
-            #     for name,param in self.model.model.convkb.named_parameters():
-            #         param.requires_grad=True
-            #     self.model.model.weights_n.requires_grad = False 
-            # else:
-            #     self.model.model.transe_ent_embed.weight.requires_grad=False
-            #     self.model.model.transe_rel_embed.weight.requires_grad=False
-            #     self.model.model.distmult_ent_embed.weight.requires_grad=False
-            #     self.model.model.distmult_rel_embed.weight.requires_grad=False
-            #     self.model.model.rotate_ent_embed.weight.requires_grad=False
-            #     self.model.model.rotate_rel_embed.weight.requires_grad=False
-            #     self.model.model.complex_ent_re_embed.weight.requires_grad=False
-            #     self.model.model.complex_rel_re_embed.weight.requires_grad=False
-            #     self.model.model.complex_ent_im_embed.weight.requires_grad=False
-            #     self.model.model.complex_rel_im_embed.weight.requires_grad=False
-            #     for name,param in self.model.model.convkb.named_parameters():
-            #         param.requires_grad=False
-            #     self.model.model.weights_n.requires_grad = True 
-
-
             res = 0.0
             t_init = time.time()
 
