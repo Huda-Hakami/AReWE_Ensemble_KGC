@@ -13,7 +13,7 @@ import numpy as np
 import copy
 from tqdm import tqdm
 
-class Trainer_old(object):
+class Trainer(object):
 
 	def __init__(self, 
 				 model = None,
