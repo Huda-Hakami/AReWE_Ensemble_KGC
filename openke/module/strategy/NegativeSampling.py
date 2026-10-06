@@ -1,6 +1,6 @@
 from .Strategy import Strategy
 
-class NegativeSampling_old(Strategy):
+class NegativeSampling(Strategy):
 
 	def __init__(self, model = None, loss = None, batch_size = 256, regul_rate = 0.0, l3_regul_rate = 0.0):
 		super(NegativeSampling_old, self).__init__()
