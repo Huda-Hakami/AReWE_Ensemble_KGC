@@ -5,7 +5,7 @@ from torch.autograd import Variable
 import numpy as np
 from .Loss import Loss
 
-class MarginLoss(Loss):
+class MarginLossAReWE(Loss):
 
 	def __init__(self, adv_temperature = None, margin = 1.0):
 		super(MarginLoss, self).__init__()
