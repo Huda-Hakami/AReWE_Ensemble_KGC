@@ -14,7 +14,7 @@ class BaseModule(nn.Module):
 		# self.pi_const.requires_grad = False
 
 	def load_checkpoint(self, path):
-		self.load_state_dict(torch.load(os.path.join(path)))
+		self.load_state_dict(torch.load(os.path.join(path)), strict=False)
 		self.eval()
 
 	def save_checkpoint(self, path):
