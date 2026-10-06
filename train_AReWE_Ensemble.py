@@ -1,4 +1,4 @@
-from openke.config import Trainer, Tester
+from openke.config import TrainerAReWE, Tester
 from openke.module.model import OptimizedEnsemble
 from openke.module.loss import  MarginLoss
 from openke.module.strategy import NegativeSampling
@@ -54,7 +54,7 @@ model = NegativeSampling(
 early_stop=0
 if Train:
 	# train the model
-	trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 50, alpha = 0.001, use_gpu = True, opt_method = "adam", data_folder=data_folder, negEnt=negEnt, rel_batch = False )
+	trainer = TrainerAReWE(model = model, data_loader = train_dataloader, train_times = 50, alpha = 0.001, use_gpu = True, opt_method = "adam", data_folder=data_folder, negEnt=negEnt, rel_batch = False )
 	trainer.set_save_steps(0,'./checkpoint/')
 	trainer.set_early_stop(early_stop)
 	trainer.set_lr_decay(0.0)
