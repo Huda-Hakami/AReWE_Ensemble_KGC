@@ -30,16 +30,16 @@ class OptimizedEnsemble(Model):
 
 		# Read source embeddings
 		TransE_embeddings=np.load("./././PreTrained_KGEs/transe_embeddings_%s.npy"%data_folder,allow_pickle=True,encoding = 'bytes').item()
-		transe_ent_weight=torch.FloatTensor(TransE_embeddings['ent_embeddings.weight'])
-		transe_rel_weight=torch.FloatTensor(TransE_embeddings['rel_embeddings.weight'])
+		transe_ent_weight = torch.FloatTensor(get_embedding(TransE_embeddings, 'ent_embeddings.weight'))
+		transe_rel_weight=torch.FloatTensor(get_embedding(TransE_embeddings,'rel_embeddings.weight'))
 		self.transe_ent_embed=nn.Embedding.from_pretrained(transe_ent_weight)
 		self.transe_ent_embed.weight.requires_grad=Optimize_Pre_Embed
 		self.transe_rel_embed=nn.Embedding.from_pretrained(transe_rel_weight)
 		self.transe_rel_embed.weight.requires_grad=Optimize_Pre_Embed
 
 		DistMult_embeddings=np.load("./././PreTrained_KGEs/distmult_embeddings_%s.npy"%data_folder,allow_pickle=True,encoding = 'bytes').item()
-		distmult_ent_weight=torch.FloatTensor(DistMult_embeddings['ent_embeddings.weight'])
-		distmult_rel_weight=torch.FloatTensor(DistMult_embeddings['rel_embeddings.weight'])
+		distmult_ent_weight=torch.FloatTensor(get_embedding(DistMult_embeddings,'ent_embeddings.weight'))
+		distmult_rel_weight=torch.FloatTensor(get_embedding(DistMult_embeddings,'rel_embeddings.weight'))
 		self.distmult_ent_embed=nn.Embedding.from_pretrained(distmult_ent_weight)
 		self.distmult_ent_embed.weight.requires_grad=Optimize_Pre_Embed
 		self.distmult_rel_embed=nn.Embedding.from_pretrained(distmult_rel_weight)
@@ -60,10 +60,10 @@ class OptimizedEnsemble(Model):
 		self.rotate_rel_embed.weight.requires_grad=Optimize_Pre_Embed
 
 		Complex_embeddings=np.load("./././PreTrained_KGEs/complex_embeddings_%s.npy"%data_folder,allow_pickle=True,encoding = 'bytes').item()
-		complex_ent_re_weight=torch.FloatTensor(Complex_embeddings['ent_re_embeddings.weight'])
-		complex_rel_re_weight=torch.FloatTensor(Complex_embeddings['rel_re_embeddings.weight'])
-		complex_ent_im_weight=torch.FloatTensor(Complex_embeddings['ent_im_embeddings.weight'])
-		complex_rel_im_weight=torch.FloatTensor(Complex_embeddings['rel_im_embeddings.weight'])
+		complex_ent_re_weight=torch.FloatTensor(get_embedding(Complex_embeddings,'ent_re_embeddings.weight'))
+		complex_rel_re_weight=torch.FloatTensor(get_embedding(Complex_embeddings,'rel_re_embeddings.weight'))
+		complex_ent_im_weight=torch.FloatTensor(get_embedding(Complex_embeddings,'ent_im_embeddings.weight'))
+		complex_rel_im_weight=torch.FloatTensor(get_embedding(Complex_embeddings,'rel_im_embeddings.weight'))
 		self.complex_ent_re_embed=nn.Embedding.from_pretrained(complex_ent_re_weight)
 		self.complex_ent_re_embed.weight.requires_grad=Optimize_Pre_Embed
 		self.complex_rel_re_embed=nn.Embedding.from_pretrained(complex_rel_re_weight)
@@ -378,4 +378,15 @@ class OptimizedEnsemble(Model):
 	def predict(self, data):
 		score =  - self.forward2(data)
 		return score.cpu().data.numpy()
+		
+def get_embedding(embeddings, key):
+	# Try string key first
+	if key in embeddings:
+		return embeddings[key]
 
+	# Try bytes key
+	key_bytes = key.encode()
+	if key_bytes in embeddings:
+		return embeddings[key_bytes]
+
+	raise KeyError(f"Key '{key}' not found in embeddings.")
