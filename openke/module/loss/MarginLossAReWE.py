@@ -8,7 +8,7 @@ from .Loss import Loss
 class MarginLossAReWE(Loss):
 
 	def __init__(self, adv_temperature = None, margin = 1.0):
-		super(MarginLoss, self).__init__()
+		super(MarginLossAReWE, self).__init__()
 
 		self.criterion = nn.LogSigmoid()
 		self.criterion2=nn.LogSoftmax(dim=1)
