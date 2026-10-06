@@ -4,8 +4,10 @@ from __future__ import print_function
 
 from .Strategy import Strategy
 from .NegativeSampling import NegativeSampling
+from .NegativeSamplingAReWE import NegativeSamplingAReWE
 
 __all__ = [
     'Strategy',
     'NegativeSampling',
+    'NegativeSamplingAReWE',
 ]
