@@ -1,6 +1,6 @@
 from openke.config import TrainerAReWE, Tester
 from openke.module.model import OptimizedEnsemble
-from openke.module.loss import  MarginLoss
+from openke.module.loss import  MarginLossAReWE
 from openke.module.strategy import NegativeSamplingAReWE
 from openke.data import PyTorchTrainDataLoader, TestDataLoader
 import numpy as np 
@@ -45,7 +45,7 @@ print ("the model is defined correctly...")
 # define the loss function
 model = NegativeSamplingAReWE(
 	model = ensemble_model, 
-	loss = MarginLoss(margin = margin),
+	loss = MarginLossAReWE(margin = margin),
 	weighting_strategy = 'score_based',  #or mrr_based
 	regul_rate1 = regul_rate1, #l2 reg
 	regul_rate2 = 0.0, #orthogonality 
