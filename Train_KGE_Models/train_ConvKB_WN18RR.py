@@ -45,12 +45,12 @@ model = NegativeSampling(
 # train the model
 if train:
 	trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 300, alpha = 0.01, use_gpu = True, opt_method = "adagrad",data_folder=data_folder)
-	trainer.set_save_steps(0,'./checkpoint/')
+	trainer.set_save_steps(0,'../checkpoint/')
 	trainer.run()
-	convkb.save_checkpoint('./checkpoint/convkb_%s.ckpt'%data_folder)
+	convkb.save_checkpoint('../checkpoint/convkb_%s.ckpt'%data_folder)
 
 	embeddings = convkb.get_parameters("numpy")
-	np.save("embeddings/convkb_embeddings_%s.npy"%data_folder,embeddings)
+	np.save("../embeddings/convkb_embeddings_%s.npy"%data_folder,embeddings)
 	print ("The model parameters have been saved correctly...")
 
 # test the model
@@ -59,7 +59,7 @@ print ("==========================================")
 print ("TEST_All")
 sys.stdout.flush()
 # dataloader for test
-test_dataloader_all = TestDataLoader("./benchmarks/%s/"%data_folder,"test2id.txt", "link")
+test_dataloader_all = TestDataLoader("../benchmarks/%s/"%data_folder,"test2id.txt", "link")
 tester1 = Tester(model = convkb, data_loader = test_dataloader_all, use_gpu = True)
 tester1.run_link_prediction(type_constrain = True)
 tester1.run_relation_prediction(type_constrain = False)
