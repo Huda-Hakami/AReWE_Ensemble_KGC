@@ -1,18 +1,20 @@
+import sys
+import os
+sys.path.append(os.path.abspath(".."))
+
 import openke
 from openke.config import Trainer, Tester
 from openke.module.model import ComplEx
 from openke.module.loss import SoftplusLoss
 from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader
-import sys 
-import os 
 import numpy as np 
 os.environ['CUDA_VISIBLE_DEVICES']='1'
 
 data_folder="FB15K237"
 # dataloader for training
 train_dataloader = TrainDataLoader(
-	in_path = "./benchmarks/%s/"%data_folder, 
+	in_path = "../benchmarks/%s/"%data_folder, 
 	nbatches = 100,
 	threads = 8, 
 	sampling_mode = "normal", 
