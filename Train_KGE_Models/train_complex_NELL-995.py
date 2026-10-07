@@ -43,15 +43,15 @@ model = NegativeSampling(
 # train the model
 trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 4000, alpha = 0.5, use_gpu = True, opt_method = "adagrad")
 trainer.run()
-complEx.save_checkpoint('./checkpoint/complEx.ckpt')
+complEx.save_checkpoint('../checkpoint/complEx.ckpt')
 
 # test the model
-complEx.load_checkpoint('./checkpoint/complEx.ckpt')
+complEx.load_checkpoint('../checkpoint/complEx.ckpt')
 print ("==========================================")
 print ("TEST_All")
 sys.stdout.flush()
 # dataloader for test
-test_dataloader_all = TestDataLoader("./benchmarks/%s/"%data_folder,"test2id.txt", "link")
+test_dataloader_all = TestDataLoader("../benchmarks/%s/"%data_folder,"test2id.txt", "link")
 tester1 = Tester(model = complEx, data_loader = test_dataloader_all, use_gpu = True)
 tester1.run_link_prediction(type_constrain = True)
 tester1.run_relation_prediction(type_constrain = False)
@@ -64,7 +64,7 @@ del tester1
 
 
 embeddings = complEx.get_parameters("numpy")
-np.save("embeddings/complex_embeddings_%s.npy"%data_folder,embeddings)
+np.save("../embeddings/complex_embeddings_%s.npy"%data_folder,embeddings)
 
 
 
