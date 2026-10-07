@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(".."))
+
 import openke
 from openke.config import Trainer, Tester
 from openke.module.model import ComplEx
@@ -5,7 +9,7 @@ from openke.module.loss import SoftplusLoss
 from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader
 import numpy as np  
-import sys 
+
 print ("DistMult Model")
 data_folder="WN18RR"
 negEnt=25
@@ -14,7 +18,7 @@ train=True
 
 # dataloader for training
 train_dataloader = TrainDataLoader(
-	in_path = "./benchmarks/%s/"%data_folder, 
+	in_path = "../benchmarks/%s/"%data_folder, 
 	nbatches = 100,
 	threads = 8, 
 	sampling_mode = "normal", 
@@ -25,7 +29,7 @@ train_dataloader = TrainDataLoader(
 )
 
 # dataloader for test
-test_dataloader = TestDataLoader("./benchmarks/WN18RR/", "link")
+test_dataloader = TestDataLoader("../benchmarks/WN18RR/", "link")
 
 # define the model
 complEx = ComplEx(
@@ -46,13 +50,13 @@ model = NegativeSampling(
 if train: 
 	trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 2000, alpha = 0.5, use_gpu = True, opt_method = "adagrad")
 	trainer.run()
-	complEx.save_checkpoint('./checkpoint/complex_%s.ckpt'%data_folder)
+	complEx.save_checkpoint('../checkpoint/complex_%s.ckpt'%data_folder)
 	embeddings = complEx.get_parameters("numpy")
-	np.save("embeddings/complex_embeddings_%s.npy"%data_folder,embeddings)
+	np.save("../embeddings/complex_embeddings_%s.npy"%data_folder,embeddings)
 	print ("The model parameters have been saved correctly...")
 
 # test the model
-complEx.load_checkpoint('./checkpoint/complex_%s.ckpt'%data_folder)
+complEx.load_checkpoint('../checkpoint/complex_%s.ckpt'%data_folder)
 print ("==========================================")
 print ("TEST_All")
 sys.stdout.flush()
