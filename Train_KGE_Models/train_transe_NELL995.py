@@ -1,10 +1,13 @@
+import sys
+import os
+sys.path.append(os.path.abspath(".."))
+
 import openke
 from openke.config import Trainer, Tester
 from openke.module.model import TransE
 from openke.module.loss import MarginLoss, SigmoidLoss
 from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader, PyTorchTrainDataLoader
-import sys
 import numpy as np 
 data_folder="NELL-995"
 negEnt=500
@@ -22,7 +25,7 @@ negRel=0
 # 	neg_rel = 0)
 
 train_dataloader = PyTorchTrainDataLoader(
-	in_path = "./benchmarks/%s/"%data_folder, 
+	in_path = "../benchmarks/%s/"%data_folder, 
 	nbatches = 100,
 	threads = 8, 
 	sampling_mode = "normal", 
@@ -52,15 +55,15 @@ model = NegativeSampling(
 # train the model
 trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 2000, alpha = 1.0, use_gpu = True, opt_method = "adagrad")
 trainer.run()
-transe.save_checkpoint('./checkpoint/transe_%s.ckpt'%data_folder)
+transe.save_checkpoint('../checkpoint/transe_%s.ckpt'%data_folder)
 
 # test the model
-transe.load_checkpoint('./checkpoint/transe_%s.ckpt'%data_folder)
+transe.load_checkpoint('../checkpoint/transe_%s.ckpt'%data_folder)
 print ("==========================================")
 print ("TEST_All")
 sys.stdout.flush()
 # dataloader for test
-test_dataloader_all = TestDataLoader("./benchmarks/%s/"%data_folder,"test2id.txt", "link")
+test_dataloader_all = TestDataLoader("../benchmarks/%s/"%data_folder,"test2id.txt", "link")
 tester1 = Tester(model = transe, data_loader = test_dataloader_all, use_gpu = True)
 tester1.run_link_prediction(type_constrain = True)
 tester1.run_relation_prediction(type_constrain = False)
@@ -69,7 +72,7 @@ print (acc,thre)
 sys.stdout.flush()
 
 embeddings = transe.get_parameters("numpy")
-np.save("embeddings/transe_embeddings_%s.npy"%data_folder,embeddings)
+np.save("../embeddings/transe_embeddings_%s.npy"%data_folder,embeddings)
 
 
 
