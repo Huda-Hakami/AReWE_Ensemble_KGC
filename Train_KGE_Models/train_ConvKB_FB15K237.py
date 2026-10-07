@@ -1,16 +1,19 @@
+import sys
+import os
+sys.path.append(os.path.abspath(".."))
+
 import openke
 from openke.config import Trainer, Tester
 from openke.module.model import ConvKB
 from openke.module.loss import SoftplusLoss
 from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader,PyTorchTrainDataLoader
-import sys
 import numpy as np 
 data_folder="FB15K237"
 train=True
 # dataloader for training
 train_dataloader = TrainDataLoader(
-	in_path = "./benchmarks/%s/"%data_folder,
+	in_path = "../benchmarks/%s/"%data_folder,
 	nbatches = 100,
 	threads = 8, 
 	sampling_mode = "normal", #it was normal, I am checking where this make better balance between head/tail prediction! 
