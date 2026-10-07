@@ -3,7 +3,7 @@ from .Strategy import Strategy
 class NegativeSampling(Strategy):
 
 	def __init__(self, model = None, loss = None, batch_size = 256, regul_rate = 0.0, l3_regul_rate = 0.0):
-		super(NegativeSampling_old, self).__init__()
+		super(NegativeSampling, self).__init__()
 		self.model = model
 		self.loss = loss
 		self.batch_size = batch_size
