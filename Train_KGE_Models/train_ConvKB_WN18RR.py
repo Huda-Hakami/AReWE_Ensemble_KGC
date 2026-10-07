@@ -54,7 +54,7 @@ if train:
 	print ("The model parameters have been saved correctly...")
 
 # test the model
-convkb.load_checkpoint('./checkpoint/convkb_%s.ckpt'%data_folder)
+convkb.load_checkpoint('../checkpoint/convkb_%s.ckpt'%data_folder)
 print ("==========================================")
 print ("TEST_All")
 sys.stdout.flush()
