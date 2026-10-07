@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(".."))
+
 import openke
 from openke.config import Trainer, Tester
 from openke.module.model import DistMult
@@ -11,7 +15,7 @@ negRel=0
 # dataloader for training
 Train=False
 train_dataloader = TrainDataLoader(
-	in_path = "./benchmarks/WN18RR/", 
+	in_path = "../benchmarks/WN18RR/", 
 	batch_size = 2000,
 	threads = 8,
 	sampling_mode = "cross", 
@@ -22,7 +26,7 @@ train_dataloader = TrainDataLoader(
 )
 
 # dataloader for test
-test_dataloader = TestDataLoader("./benchmarks/WN18RR/","test2id.txt", "link")
+test_dataloader = TestDataLoader("../benchmarks/WN18RR/","test2id.txt", "link")
 
 # define the model
 distmult = DistMult(
@@ -46,9 +50,9 @@ model = NegativeSampling(
 if Train:
 	trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 400, alpha = 0.002, use_gpu = True, opt_method = "adam")
 	trainer.run()
-	distmult.save_checkpoint('./checkpoint/distmult.ckpt')
+	distmult.save_checkpoint('../checkpoint/distmult.ckpt')
 
 # test the model
-distmult.load_checkpoint('./checkpoint/distmult.ckpt')
+distmult.load_checkpoint('../checkpoint/distmult.ckpt')
 tester = Tester(model = distmult, data_loader = test_dataloader, use_gpu = True)
 tester.run_link_prediction(type_constrain = True)
