@@ -16,8 +16,8 @@ def parse_args():
 	parser.add_argument("--weighting_strategy",type=str,default="score_based",choices=["score_based", "mrr_based"],help="Relation-specific weighting strategy")
 	parser.add_argument("--negEnt",type=int,default=200,help="Number of negative examples per positive triple")
 	parser.add_argument("--train_split",type=str,default="valid",choices=["train", "valid"],help="Data split used to fine-tune AReWE")
-	parser.add_argument("--do_train",type=lambda x: x.lower() == "true",default=True,help="Whether to fine-tune AReWE (True) or only test (False)."
-)
+	parser.add_argument("--do_train",type=lambda x: x.lower() == "true",default=True,help="Whether to fine-tune AReWE (True) or only test (False).")
+	parser.add_argument("--TCNS",type=lambda x: x.lower() == "true",default=False,help="Whether to apply type constraint negative sampling.")
 	return parser.parse_args()
 
 
@@ -35,7 +35,7 @@ if __name__ == "__main__":
 		threads = 1, 
 		sampling_mode = 'cross, 
 		bern_flag = 1,
-		TC_NS = 1, 
+		TC_NS = args.TCNS, 
 		filter_flag = 1, 
 		neg_ent = args.negEnt,
 		neg_rel = 0
