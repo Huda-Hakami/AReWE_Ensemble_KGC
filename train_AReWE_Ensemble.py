@@ -15,6 +15,7 @@ def parse_args():
 	parser.add_argument("--batch_size",type=int,default=1024,help="Training batch size")
 	parser.add_argument("--epochs",type=int,default=50,help="Number of training epochs")
 	parser.add_argument("--lr",type=float,default=0.0001,help="Learning rate")
+	parser.add_argument("--margin",type=float,default=1.0,help="margin")
 	parser.add_argument("--weighting_strategy",type=str,default="score_based",choices=["score_based", "mrr_based"],help="Relation-specific weighting strategy")
 	parser.add_argument("--negEnt",type=int,default=200,help="Number of negative examples per positive triple")
 	parser.add_argument("--train_split",type=str,default="valid",choices=["train", "valid"],help="Data split used to fine-tune AReWE")
@@ -59,7 +60,7 @@ if __name__ == "__main__":
 		# train the model
 		model = NegativeSamplingAReWE(
 			model = ensemble_model, 
-			loss = MarginLossAReWE(margin = margin),
+			loss = MarginLossAReWE(margin = args.margin),
 			weighting_strategy = args.weighting_strategy,  
 			regul_rate1 = 0.0, #l2 reg
 			regul_rate2 = 0.0, #orthogonality 
