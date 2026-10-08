@@ -72,7 +72,7 @@ if __name__ == "__main__":
 		if not early_stop:
 			ensemble_model.save_checkpoint('./checkpoint/AReWE_Embeddings_%s.ckpt'%args.data_folder)
 			embeddings = ensemble_model.get_parameters("numpy")
-			np.save("embeddings/AReWE_Embeddings_%s.npy"%data_folder,embeddings)
+			np.save("embeddings/AReWE_Embeddings_%s.npy"%args.data_folder,embeddings)
 			print ("The model parameters have been saved correctly...")
 	else:  # Testing
 		ensemble_model.load_checkpoint('./AReW_Ens_FineTuned/%s_FullModel_SumScores_Valid.ckpt'%args.data_folder)
