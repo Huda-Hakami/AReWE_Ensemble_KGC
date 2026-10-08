@@ -6,9 +6,6 @@ from openke.data import PyTorchTrainDataLoader, TestDataLoader
 import numpy as np 
 import argparse
 
-
-negRel=0
-
 def parse_args():
 	parser = argparse.ArgumentParser(description="Train AReWE")
 	parser.add_argument("--data_folder",type=str,default='FB15K237',required=True,help="Dataset folder, e.g., FB15K237, WN18RR, or NELL-995")
@@ -41,7 +38,7 @@ if __name__ == "__main__":
 		TC_NS = 1, 
 		filter_flag = 1, 
 		neg_ent = args.negEnt,
-		neg_rel = negRel
+		neg_rel = 0
 	)
 	
 	print ("the model is defined correctly...")
@@ -52,7 +49,7 @@ if __name__ == "__main__":
 		batch_size = train_dataloader.get_batch_size(),
 		ent_tot = train_dataloader.get_ent_tot(),
 		rel_tot = train_dataloader.get_rel_tot(),
-		neg_examples=args.negEnt+negRel
+		neg_examples=args.negEnt
 	)
 
 	early_stop=0
