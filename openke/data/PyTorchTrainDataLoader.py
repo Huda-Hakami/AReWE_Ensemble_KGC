@@ -228,7 +228,6 @@ class PyTorchTrainDataset(Dataset):
 		avoid_nell=[93,198]
 		
 		if self.data_folder == 'NELL-995': # ....mixed sampling TCNS and w/o TCN
-			print('here 111')
 			max_=int(num_max/2)
 			if num_max%2==0:
 				max_1=max_2=max_
@@ -243,10 +242,8 @@ class PyTorchTrainDataset(Dataset):
 			tmp1=np.array(tmp1)
 			tmp= np.concatenate((tmp1,tmp2))
 		elif not self.TC_NS or (self.data_folder=='FB15K237' and r in avoid_fb) or (self.data_folder=='NELL-995' and r in avoid_nell):
-			print('here 222')
 			tmp = torch.randint(low = 0, high = self.ent_total, size = (num_max, )).numpy()
 		else: #Type Constraint Negative Sampling
-			print('333')
 			if len(self.t_of_r[r])>=num_max:
 				tmp = np.random.choice(self.t_of_r[r],size=num_max,replace=False)
 			else:
