@@ -45,7 +45,7 @@ if train:
 	trainer = Trainer(model = model, data_loader = train_dataloader, train_times = 400, alpha = 0.01, use_gpu = True, opt_method = "adagrad",data_folder=data_folder)
 	trainer.set_save_steps(0,'../checkpoint/')
 	trainer.run()
-	convkb.save_checkpoint('./checkpoint/convkb_%s.ckpt'%data_folder)
+	convkb.save_checkpoint('../checkpoint/convkb_%s.ckpt'%data_folder)
 
 	embeddings = convkb.get_parameters("numpy")
 	np.save("../embeddings/convkb_embeddings_%s.npy"%data_folder,embeddings)
