@@ -53,8 +53,7 @@ if __name__ == "__main__":
 		batch_size = train_dataloader.get_batch_size(),
 		ent_tot = train_dataloader.get_ent_tot(),
 		rel_tot = train_dataloader.get_rel_tot(),
-		neg_examples=args.negEnt+negRel,
-		sampling_mode = sampling_mode
+		neg_examples=args.negEnt+negRel
 	)
 
 	early_stop=0
