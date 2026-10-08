@@ -7,9 +7,7 @@ import numpy as np
 import argparse
 
 
-margin = 0.8
 negRel=0
-sampling_mode ="cross"
 
 def parse_args():
 	parser = argparse.ArgumentParser(description="Train AReWE")
@@ -37,7 +35,7 @@ if __name__ == "__main__":
 		tri_file = tri_file,
 		batch_size= args.batch_size,
 		threads = 1, 
-		sampling_mode = sampling_mode, 
+		sampling_mode = 'cross, 
 		bern_flag = 1,
 		TC_NS = 1, 
 		filter_flag = 1, 
