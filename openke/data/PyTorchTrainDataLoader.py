@@ -191,14 +191,30 @@ class PyTorchTrainDataset(Dataset):
 
 		avoid_fb=[25,120,167,195,33,171,110,209,118,91,156,148,137,168]
 		avoid_nell=[93,198]
-		if not self.TC_NS or (self.data_folder=='FB15K237' and r in avoid_fb) or (self.data_folder=='NELL-995' and r in avoid_nell):
+		
+		if self.data_folder == 'NELL-995': # ....mixed sampling TCNS and w/o TCN
+			max_=int(num_max/2)
+			if num_max%2==0:
+				max_1=max_2=max_
+			else:
+				max_1=max_
+				max_2=max_+1
+			tmp1 = torch.randint(low = 0, high = self.ent_total, size = (max_1, ))
+			if len(self.h_of_r[r])>=max_2:
+				tmp2 = np.random.choice(self.h_of_r[r],size=max_2,replace=False)
+			else:
+				tmp2 = np.random.choice(self.h_of_r[r],size=max_2)
+			tmp1=np.array(tmp1)
+			tmp= np.concatenate((tmp1,tmp2))
+
+		elif not self.TC_NS or (self.data_folder=='FB15K237' and r in avoid_fb) or (self.data_folder=='NELL-995' and r in avoid_nell):
 			tmp = torch.randint(low = 0, high = self.ent_total, size = (num_max, )).numpy()
 		else: #Type Constraint Negative Sampling
 			if len(self.h_of_r[r])>=num_max:
 				tmp = np.random.choice(self.h_of_r[r],size=num_max,replace=False)
 			else:
 				tmp = np.random.choice(self.h_of_r[r],size=num_max)
-
+				
 		if not self.filter_flag:
 			return tmp
 		mask = np.isin(tmp, self.h_of_tr[(t, r)], assume_unique=True, invert=True)
@@ -206,33 +222,31 @@ class PyTorchTrainDataset(Dataset):
 		return neg
 
 
-		# ....mixed sampling TCNS and w/o TCNS
-		# max_=int(num_max/2)
-		# if num_max%2==0:
-		# 	max_1=max_2=max_
-		# else:
-		# 	max_1=max_
-		# 	max_2=max_+1
-		# tmp1 = torch.randint(low = 0, high = self.ent_total, size = (max_1, ))
-		# if len(self.h_of_r[r])>=max_2:
-		# 	tmp2 = np.random.choice(self.h_of_r[r],size=max_2,replace=False)
-		# else:
-		# 	tmp2 = np.random.choice(self.h_of_r[r],size=max_2)
-		# tmp1=np.array(tmp1)
-		# tmp= np.concatenate((tmp1,tmp2))
-		# if not self.filter_flag:
-		# 	return tmp
-		# mask = np.isin(tmp, self.h_of_tr[(t, r)], assume_unique=True, invert=True)
-		# neg = tmp[mask]
-		# return neg
-
 	def __corrupt_tail(self, h, r, num_max = 1):
 	
 		avoid_fb=[25,120,167,195,33,171,110,209,118,91,156,148,137,168,73,113,17,200,98,204]
 		avoid_nell=[93,198]
-		if not self.TC_NS or (self.data_folder=='FB15K237' and r in avoid_fb) or (self.data_folder=='NELL-995' and r in avoid_nell):
+		
+		if self.data_folder == 'NELL-995': # ....mixed sampling TCNS and w/o TCN
+			print('here 111')
+			max_=int(num_max/2)
+			if num_max%2==0:
+				max_1=max_2=max_
+			else:
+				max_1=max_
+				max_2=max_+1
+			tmp1 = torch.randint(low = 0, high = self.ent_total, size = (max_1, ))
+			if len(self.t_of_r[r])>=max_2:
+				tmp2 = np.random.choice(self.t_of_r[r],size=max_2,replace=False)
+			else:
+				tmp2 = np.random.choice(self.t_of_r[r],size=max_2)
+			tmp1=np.array(tmp1)
+			tmp= np.concatenate((tmp1,tmp2))
+		elif not self.TC_NS or (self.data_folder=='FB15K237' and r in avoid_fb) or (self.data_folder=='NELL-995' and r in avoid_nell):
+			print('here 222')
 			tmp = torch.randint(low = 0, high = self.ent_total, size = (num_max, )).numpy()
 		else: #Type Constraint Negative Sampling
+			print('333')
 			if len(self.t_of_r[r])>=num_max:
 				tmp = np.random.choice(self.t_of_r[r],size=num_max,replace=False)
 			else:
@@ -243,26 +257,6 @@ class PyTorchTrainDataset(Dataset):
 		mask = np.isin(tmp, self.t_of_hr[(h, r)], assume_unique=True, invert=True)
 		neg = tmp[mask]
 		return neg
-
-		# ....mixed sampling TCNS and w/o TCNS
-		# max_=int(num_max/2)
-		# if num_max%2==0:
-		# 	max_1=max_2=max_
-		# else:
-		# 	max_1=max_
-		# 	max_2=max_+1
-		# tmp1 = torch.randint(low = 0, high = self.ent_total, size = (max_1, ))
-		# if len(self.t_of_r[r])>=max_2:
-		# 	tmp2 = np.random.choice(self.t_of_r[r],size=max_2,replace=False)
-		# else:
-		# 	tmp2 = np.random.choice(self.t_of_r[r],size=max_2)
-		# tmp1=np.array(tmp1)
-		# tmp= np.concatenate((tmp1,tmp2))
-		# if not self.filter_flag:
-		# 	return tmp
-		# mask = np.isin(tmp, self.t_of_hr[(h, r)], assume_unique=True, invert=True)
-		# neg = tmp[mask]
-		# return neg
 
 	def __corrupt_rel(self, h, t, num_max = 1):
 		tmp = torch.randint(low = 0, high = self.rel_total, size = (num_max, )).numpy()
