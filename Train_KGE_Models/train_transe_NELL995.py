@@ -13,17 +13,6 @@ data_folder="NELL-995"
 negEnt=500
 negRel=0
 
-# dataloader for training
-# train_dataloader = TrainDataLoader(
-# 	in_path = "./benchmarks/%s/"%data_folder,
-# 	nbatches = 100,
-# 	threads = 8, 
-# 	sampling_mode = "normal", 
-# 	bern_flag = 1, 
-# 	filter_flag = 1, 
-# 	neg_ent = negEnt,
-# 	neg_rel = 0)
-
 train_dataloader = PyTorchTrainDataLoader(
 	in_path = "../benchmarks/%s/"%data_folder, 
 	nbatches = 100,
