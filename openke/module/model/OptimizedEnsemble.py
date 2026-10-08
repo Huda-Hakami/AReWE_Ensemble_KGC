@@ -14,7 +14,7 @@ from . import ConvKB
 
 class OptimizedEnsemble(Model):
 
-	def __init__(self, data_folder, batch_size, ent_tot, rel_tot, neg_examples=0,sampling_mode=None, margin = None, epsilon = None):
+	def __init__(self, data_folder, batch_size, ent_tot, rel_tot, neg_examples=0, margin = None, epsilon = None):
 		super(OptimizedEnsemble, self).__init__(ent_tot, rel_tot)
 
 		self.batch_size=batch_size
@@ -24,7 +24,6 @@ class OptimizedEnsemble(Model):
 		self.neg_examples=neg_examples
 		self.logsigmoid = nn.LogSigmoid()
 		self.sig=nn.Sigmoid()
-		self.sampling_mode = sampling_mode
 
 		Optimize_Pre_Embed=True
 
