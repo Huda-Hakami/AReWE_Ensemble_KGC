@@ -31,16 +31,9 @@ The implementation supports training, evaluation, and reproduction of the experi
 
 ## Datasets
 Each dataset should contain the corresponding training, validation, and testing files required by OpenKE.
-
-Training
 Configure the desired dataset and training hyperparameters in train_AReWE_Ensemble.py.
 Download Pretrained KGE models for benchmark KGs in PreTrained_KGEs folder before train AReWE. 
-Run training using:
-python3 train_AReWE_Ensemble.py
-The trained model checkpoint will be saved in:
-checkpoints/
-Learned embeddings will be stored in:
-embeddings/
+The trained model checkpoint will be saved in the checkpoints/ folder. Learned embeddings will be also stored in the embeddings/ folder. 
 
 
 ## Evaluation
