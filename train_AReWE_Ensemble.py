@@ -86,9 +86,6 @@ if __name__ == "__main__":
 		"NELL-995": "test2id_refined.txt",
 	}
 
-	# ensemble_model.load_checkpoint('./checkpoint/AReWE_Embeddings_%s.ckpt'%args.data_folder)
-	# # ensemble_model.load_checkpoint('./AReW_Ens_FineTuned/%s_FullModel_MRR.ckpt'%data_folder)
-
 	if link_prediction=='micro': # test the model (micro)
 		test_dataloader_all = TestDataLoader("./benchmarks/%s/"%args.data_folder,TEST_FILES[args.data_folder], "link")
 		tester1 = Tester(model = ensemble_model, data_loader = test_dataloader_all, use_gpu = True)
